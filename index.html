@@ -15,63 +15,126 @@
   </head>
   <body>
     <header>
-      <h1 id="logo">MataFinanças</h1>
+      <img src="./assets/logo.svg" alt="Logo MataFinancas">
     </header>
     <main class="container">
       <section id="balance">
-        <h2>Balanços</h2>
+        
         <div class="card">
-          <h3>Entradas</h3>
+          <h3>
+            <span>Entradas</span>
+            <img src="./assets/income.svg" alt="Entradas">
+          </h3>
           <p>R$:5.000,00</p>
         </div>
 
         <div class="card">
-          <h3>Saidas</h3>
+          <h3>
+            <span>Saidas</span>
+            <img src="./assets/minus.svg" alt="">
+          </h3>
           <p>R$:2.000,00</p>
         </div>
 
         <div class="card green">
-          <h3>Total</h3>
+          <h3>
+            <span>Total</span>
+            <img src="./assets/total.svg" alt="">
+          </h3>
           <p>R$:3.000,00</p>
         </div>
       </section>
       <section id="transactions">
         <h2>Transações</h2>
+        <a href="#" onclick="Modal.open()" class="button new">+ Nova Transação</a>
         <table id="data-table">
           <thead>
             <tr>
               <th>Descrição</th>
               <th>Valor</th>
               <th>Data</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Manisa</td>
-              <td>R$: 12.000,00</td>
+              <td class="positive">R$: 12.000,00</td>
               <td>13/04/2020</td>
+              <td><img src="./assets/minus.svg" alt=""></td>
             </tr>
             <tr>
               <td>Compra de cursos</td>
-              <td>-R$ 59,00</td>
+              <td class="negative">-R$ 59,00</td>
               <td>10/04/2020</td>
+              <td><img src="./assets/minus.svg" alt=""></td>
             </tr>
             <tr>
               <td>Pagamento de notebook</td>
-              <td>-R$ 1.200,00</td>
+              <td class="negative">-R$ 1.200,00</td>
               <td>27/03/2020</td>
+              <td><img src="./assets/minus.svg" alt=""></td>
             </tr>
             <tr>
               <td>Compra de água</td>
-              <td>-R$ 5.400,00</td>
+              <td class="negative">-R$ 5.400,00</td>
               <td>15/03/2020</td>
+              <td><img src="./assets/minus.svg" alt=""></td>
             </tr>
           </tbody>
         </table>
       </section>
     </main>
+    <div class="model-overlay">
+      <div class="modal">
+        <div id="form">
+          <h2>Nova Transação</h2>
+          <form action="">
+            <div class="input-group">
+              <label class="sr-only" for="description">Descrição</label>
+              <input type="text" id="description" name="description" placeholder="Descrição">
+            </div>
+            <div class="input-group">
+              <label class="sr-only"for="amount">Valor</label>
+              <input type="number" name="amount" id="amount" placeholder="0,00" step="0.01">
+              <small class="help"> <br>Use o sinal - (negativo) para despesas e, (vírgula) para casas decimais.</small>
+            </div>
+            <div class="input-group">
+              <form action="">
+                <label class="sr-only" for="date">Data</label>
+                <input type="date" name="date" id="date">
+              </form>
+            </div>
+
+            <div class="input-group actions">
+              <a href="#" onclick="Modal.close()" class="button cancel"> Cancelar</a>
+              <button>Salvar</button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <footer>
-      <p>Desenvolvido por MataTech</p>
+      <p>Desenvolvido por Mata</p>
     </footer>
+
+    <script>
+      Modal = {
+        open(){
+          document
+            .querySelector('.model-overlay') //Vai pegar o primeiro elemento no documento com a classe = ".model-overlay"
+            .classList.add('active') // Adiciona uma nova classe no elemento descoberto
+        },
+        close(){
+          document
+            .querySelector('.model-overlay')
+            .classList.remove('active')
+            
+        }
+
+      }
+    </script>
   </body>
 </html>
