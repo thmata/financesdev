@@ -39,13 +39,13 @@ const Modal = {
 
   const Transaction = {
       incomes(){
-          //Somar as entradas
+          return "R$ 12.000";
       },
       expenses(){
-          //Somar as saídas
+          return "R$ 6.659"
       },
       total(){
-          //Total vai ser entradas - saídas
+          return "R$ 5.341"
 
       }
   }
@@ -56,7 +56,6 @@ const Modal = {
         const tr = document.createElement('tr')
         tr.innerHTML = DOM.innerHTMLTransaction(transations)
         DOM.transactionsContainer.appendChild(tr)
-        console.log(tr.innerHTML)
     },
     innerHTMLTransaction(transations){ 
           CssClass = transations.amount > 0 ? "positive" : "negative"
@@ -64,7 +63,7 @@ const Modal = {
           const html = `
           <tr>
               <td class="description">${transations.description}</td>
-              <td class="${CssClass}">${transations.amount}</td>
+              <td class="${CssClass}">${amount}</td>
               <td class="date">${transations.date}</td>
               <td>
                 <img src="./assets/minus.svg" alt="">
@@ -73,12 +72,24 @@ const Modal = {
           ` 
           
         return html
+      },
+      updateBalance(){
+        document.getElementById('SaidasDisplay').innerHTML=Transaction.expenses()
+        document.getElementById('EntradasDisplay').innerHTML=Transaction.incomes()
+        document.getElementById('TotalDisplay').innerHTML=Transaction.total()
       }
   }
 
   const Utils = {
     formatCurrency(value){
-      console.log(value)
+      const signal = Number(value) < 0 ? "-" : ""
+      value = String(value).replace(/\D/g, "")
+      value = Number(value) / 100
+      value = value.toLocaleString("pt-BR",{
+        style:"currency",
+        currency:"BRL"
+      })
+      return signal+value
 
     }
   }
@@ -86,3 +97,5 @@ const Modal = {
 transations.forEach(function(transations){
   DOM.addTransaction(transations)
 })
+
+DOM.updateBalance()
